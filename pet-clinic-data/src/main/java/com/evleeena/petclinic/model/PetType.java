@@ -1,6 +1,6 @@
 package com.evleeena.petclinic.model;
 
-public class PetType {
+public class PetType extends Pet {
     private String name;
 
     public String getName() {

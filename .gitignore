@@ -141,3 +141,6 @@ Desktop.ini
 .eslintcache
 /pet-clinic-data/target/
 /pet-clinic-web/target/
+/pet-clinic-web/pom.xml.releaseBackup
+/pom.xml.releaseBackup
+/release.properties

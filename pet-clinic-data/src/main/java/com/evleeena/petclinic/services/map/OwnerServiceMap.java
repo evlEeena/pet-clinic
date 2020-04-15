@@ -2,8 +2,10 @@ package com.evleeena.petclinic.services.map;
 
 import com.evleeena.petclinic.model.Owner;
 import com.evleeena.petclinic.services.OwnerService;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+@Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Override

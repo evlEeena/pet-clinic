@@ -5,11 +5,11 @@ import com.evleeena.petclinic.model.Vet;
 import com.evleeena.petclinic.services.OwnerService;
 import com.evleeena.petclinic.services.VetService;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
-@Controller
+@Component
 public class DataLoader implements CommandLineRunner {
 
     @Resource
@@ -18,7 +18,7 @@ public class DataLoader implements CommandLineRunner {
     private VetService vetService;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Owner owner1 = new Owner();
         owner1.setId(1L);
         owner1.setFirstName("Michael");

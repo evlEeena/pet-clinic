@@ -20,9 +20,6 @@ public class Person extends BaseEntity {
         this.lastName = lastName;
     }
 
-
-
-
     @Override
     public String toString() {
         return "Person{" +

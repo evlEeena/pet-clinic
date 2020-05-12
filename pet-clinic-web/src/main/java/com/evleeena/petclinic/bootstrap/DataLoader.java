@@ -1,15 +1,18 @@
 package com.evleeena.petclinic.bootstrap;
 
 import com.evleeena.petclinic.model.Owner;
+import com.evleeena.petclinic.model.Pet;
 import com.evleeena.petclinic.model.PetType;
 import com.evleeena.petclinic.model.Vet;
 import com.evleeena.petclinic.services.OwnerService;
+import com.evleeena.petclinic.services.PetService;
 import com.evleeena.petclinic.services.PetTypeService;
 import com.evleeena.petclinic.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -20,6 +23,8 @@ public class DataLoader implements CommandLineRunner {
     private VetService vetService;
     @Resource
     private PetTypeService petTypeService;
+    @Resource
+    private PetService petService;
 
     @Override
     public void run(String... args) {
@@ -37,16 +42,38 @@ public class DataLoader implements CommandLineRunner {
         Owner owner1 = new Owner();
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");
+        owner1.setAddress("123 Brickerel");
+        owner1.setCity("Miami");
+        owner1.setTelephone("1253123123");
+
+        Pet mikesPet = new Pet();
+        mikesPet.setName("Rosco");
+        mikesPet.setPetType(savedDogPetType);
+        mikesPet.setBirthDate(LocalDate.of(2018, 1, 8));
+        mikesPet.setOwner(owner1);
+
+        owner1.getPets().add(mikesPet);
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
+        owner2.setAddress("123 Brickerel");
+        owner2.setCity("Miami");
+        owner2.setTelephone("213321345");
+
+        Pet fionasPet = new Pet();
+        fionasPet.setName("Kiko");
+        fionasPet.setPetType(savedCatPetType);
+        fionasPet.setBirthDate(LocalDate.of(2016, 5, 23));
+        fionasPet.setOwner(owner2);
+
+        owner2.getPets().add(fionasPet);
 
         ownerService.save(owner1);
         ownerService.save(owner2);
 
-        System.out.println("Loaded Owners...");
-        System.out.println(ownerService.findAll());
+        System.out.println("Loaded Pets...");
+        System.out.println(petService.findAll());
 
         Vet vet1 = new Vet();
         vet1.setFirstName("Sam");

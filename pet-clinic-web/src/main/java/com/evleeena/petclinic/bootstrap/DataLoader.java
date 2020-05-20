@@ -1,13 +1,7 @@
 package com.evleeena.petclinic.bootstrap;
 
-import com.evleeena.petclinic.model.Owner;
-import com.evleeena.petclinic.model.Pet;
-import com.evleeena.petclinic.model.PetType;
-import com.evleeena.petclinic.model.Vet;
-import com.evleeena.petclinic.services.OwnerService;
-import com.evleeena.petclinic.services.PetService;
-import com.evleeena.petclinic.services.PetTypeService;
-import com.evleeena.petclinic.services.VetService;
+import com.evleeena.petclinic.model.*;
+import com.evleeena.petclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -25,10 +19,17 @@ public class DataLoader implements CommandLineRunner {
     private PetTypeService petTypeService;
     @Resource
     private PetService petService;
+    @Resource
+    private SpecialityService specialityService;
 
     @Override
     public void run(String... args) {
+        if (petService.findAll().size() == 0) {
+            loadData();
+        }
+    }
 
+    private void loadData() {
         PetType dog = new PetType();
         dog.setName("Dog");
         PetType savedDogPetType = petTypeService.save(dog);
@@ -75,13 +76,28 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Loaded Pets...");
         System.out.println(petService.findAll());
 
+        Speciality radiology = new Speciality();
+        radiology.setDescription("Radiology");
+
+        Speciality surgery = new Speciality();
+        surgery.setDescription("Surgery");
+
+        Speciality dentistry = new Speciality();
+        dentistry.setDescription("Dentistry");
+
+        specialityService.save(radiology);
+        specialityService.save(surgery);
+        specialityService.save(dentistry);
+
         Vet vet1 = new Vet();
         vet1.setFirstName("Sam");
         vet1.setLastName("Axe");
+        vet1.getSpecialities().add(radiology);
 
         Vet vet2 = new Vet();
         vet2.setFirstName("Jessie");
         vet2.setLastName("Porter");
+        vet2.getSpecialities().add(surgery);
 
         vetService.save(vet1);
         vetService.save(vet2);

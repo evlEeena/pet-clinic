@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 
 @Controller
-@RequestMapping("/vets")
+@RequestMapping({"/vets", "/vets.html"})
 public class VetController {
 
     @Resource

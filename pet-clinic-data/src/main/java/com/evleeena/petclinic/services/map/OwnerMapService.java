@@ -12,7 +12,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 
 @Service
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Resource
     private PetTypeService petTypeService;

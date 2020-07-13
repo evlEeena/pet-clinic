@@ -104,6 +104,7 @@ public class DataLoader implements CommandLineRunner {
         vetService.save(vet1);
         vetService.save(vet2);
 
+        // todo fix lazy init exception
         System.out.println("Loaded Vets... ");
         System.out.println(vetService.findAll());
 

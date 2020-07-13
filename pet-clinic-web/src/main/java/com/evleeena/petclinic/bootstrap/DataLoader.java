@@ -21,6 +21,8 @@ public class DataLoader implements CommandLineRunner {
     private PetService petService;
     @Resource
     private SpecialityService specialityService;
+    @Resource
+    private VisitService visitService;
 
     @Override
     public void run(String... args) {
@@ -104,5 +106,20 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("Loaded Vets... ");
         System.out.println(vetService.findAll());
+
+        Visit roscoVisit = new Visit();
+        roscoVisit.setPet(mikesPet);
+        roscoVisit.setDate(LocalDate.now());
+        roscoVisit.setDescription("Rosco's castration");
+
+        Visit kikoVisit = new Visit();
+        kikoVisit.setPet(fionasPet);
+        kikoVisit.setDate(LocalDate.now());
+        kikoVisit.setDescription("Kiko's vaccination");
+
+        visitService.save(roscoVisit);
+        visitService.save(kikoVisit);
+
+        System.out.println("Loaded visits: " + visitService.findAll());
     }
 }

@@ -3,13 +3,15 @@ package com.evleeena.petclinic.services.map;
 import com.evleeena.petclinic.model.Vet;
 import com.evleeena.petclinic.services.SpecialityService;
 import com.evleeena.petclinic.services.VetService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 
 @Service
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
+@Profile("map")
+public class VetMapService extends AbstractMapService<Vet, Long> implements VetService {
 
     @Resource
     private SpecialityService specialityService;

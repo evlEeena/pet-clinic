@@ -5,6 +5,7 @@ import com.evleeena.petclinic.model.Pet;
 import com.evleeena.petclinic.services.OwnerService;
 import com.evleeena.petclinic.services.PetService;
 import com.evleeena.petclinic.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -12,6 +13,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 
 @Service
+@Profile("map")
 public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Resource

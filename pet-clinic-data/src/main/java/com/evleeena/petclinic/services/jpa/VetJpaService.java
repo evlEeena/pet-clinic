@@ -5,10 +5,12 @@ import com.evleeena.petclinic.repositories.VetRepository;
 import com.evleeena.petclinic.services.VetService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Profile("jpa")
@@ -18,10 +20,11 @@ public class VetJpaService implements VetService {
     private VetRepository vetRepository;
 
     @Override
+    @Transactional
     public Set<Vet> findAll() {
-        Set<Vet> vets = new HashSet<>();
-        vetRepository.findAll().forEach(vets::add);
-        return vets;
+        return StreamSupport.stream(vetRepository.findAll().spliterator(), false)
+                .peek(vet -> vet.getSpecialities().size())
+                .collect(Collectors.toSet());
     }
 
     @Override

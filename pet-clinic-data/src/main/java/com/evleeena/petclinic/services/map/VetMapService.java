@@ -10,7 +10,7 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
 
 @Service
-@Profile("map")
+@Profile({"default","map"})
 public class VetMapService extends AbstractMapService<Vet, Long> implements VetService {
 
     @Resource

@@ -13,7 +13,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 
 @Service
-@Profile("map")
+@Profile({"default","map"})
 public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Resource

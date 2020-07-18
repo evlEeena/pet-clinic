@@ -2,6 +2,7 @@ package com.evleeena.petclinic.bootstrap;
 
 import com.evleeena.petclinic.model.*;
 import com.evleeena.petclinic.services.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,7 @@ import javax.annotation.Resource;
 import java.time.LocalDate;
 
 @Component
+@Slf4j
 public class DataLoader implements CommandLineRunner {
 
     @Resource
@@ -32,39 +34,26 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadData() {
-        PetType dog = new PetType();
-        dog.setName("Dog");
+        PetType dog = PetType.builder().name("Dog").build();
         PetType savedDogPetType = petTypeService.save(dog);
 
-        PetType cat = new PetType();
-        cat.setName("Cat");
+        PetType cat = PetType.builder().name("Cat").build();
         PetType savedCatPetType = petTypeService.save(cat);
 
-        System.out.println("Pet types: " + savedDogPetType + ", " + savedCatPetType);
+        log.debug("Pet types: {}, {}", savedDogPetType, savedCatPetType);
 
-        Owner owner1 = new Owner();
-        owner1.setFirstName("Michael");
-        owner1.setLastName("Weston");
-        owner1.setAddress("123 Brickerel");
-        owner1.setCity("Miami");
-        owner1.setTelephone("1253123123");
+        Owner owner1 = Owner.builder().firstName("Michael").lastName("Weston")
+                .address("123 Brickerel").city("Miami").telephone("1253123123").build();
 
-        Pet mikesPet = new Pet();
-        mikesPet.setName("Rosco");
-        mikesPet.setPetType(savedDogPetType);
-        mikesPet.setBirthDate(LocalDate.of(2018, 1, 8));
-        mikesPet.setOwner(owner1);
+        Pet mikesPet = Pet.builder().name("Rosco").petType(savedDogPetType)
+                .birthDate(LocalDate.of(2018, 1, 8)).owner(owner1).build();
 
         owner1.getPets().add(mikesPet);
 
-        Owner owner2 = new Owner();
-        owner2.setFirstName("Fiona");
-        owner2.setLastName("Glenanne");
-        owner2.setAddress("123 Brickerel");
-        owner2.setCity("Miami");
-        owner2.setTelephone("213321345");
+        Owner owner2 = Owner.builder().firstName("Fiona").lastName("Glenanne")
+                .address("123 Brickerel").city("Miami").telephone("213321345").build();
 
-        Pet fionasPet = new Pet();
+        Pet fionasPet = Pet.builder().name().petType().birthDate().owner().build();
         fionasPet.setName("Kiko");
         fionasPet.setPetType(savedCatPetType);
         fionasPet.setBirthDate(LocalDate.of(2016, 5, 23));
@@ -75,8 +64,7 @@ public class DataLoader implements CommandLineRunner {
         ownerService.save(owner1);
         ownerService.save(owner2);
 
-        System.out.println("Loaded Pets...");
-        System.out.println(petService.findAll());
+        log.debug("Loaded Pets...\n {}", petService.findAll());
 
         Speciality radiology = new Speciality();
         radiology.setDescription("Radiology");
@@ -104,8 +92,7 @@ public class DataLoader implements CommandLineRunner {
         vetService.save(vet1);
         vetService.save(vet2);
 
-        System.out.println("Loaded Vets... ");
-        System.out.println(vetService.findAll());
+        log.debug("Loaded Vets... \n{}", vetService.findAll());
 
         Visit roscoVisit = new Visit();
         roscoVisit.setPet(mikesPet);
@@ -120,6 +107,6 @@ public class DataLoader implements CommandLineRunner {
         visitService.save(roscoVisit);
         visitService.save(kikoVisit);
 
-        System.out.println("Loaded visits: " + visitService.findAll());
+        log.debug("Loaded visits: {}", visitService.findAll());
     }
 }

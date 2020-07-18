@@ -8,12 +8,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "specialities")
+@NoArgsConstructor
 @Getter
 @Setter
-@Builder
 @ToString(callSuper = true)
 public class Speciality extends BaseEntity {
 
     @Column(name = "description")
     private String description;
+
+    @Builder
+    public Speciality(String description) {
+        this.description = description;
+    }
 }

@@ -1,7 +1,6 @@
 package com.evleeena.petclinic.model;
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -11,7 +10,6 @@ import javax.persistence.MappedSuperclass;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 @ToString(callSuper = true)
 public class Person extends BaseEntity {
 

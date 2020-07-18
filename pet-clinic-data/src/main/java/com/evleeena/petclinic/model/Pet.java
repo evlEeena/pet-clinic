@@ -9,9 +9,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "pets")
+@NoArgsConstructor
 @Getter
 @Setter
-@Builder
 @ToString(callSuper = true)
 public class Pet extends BaseEntity {
 
@@ -32,4 +32,11 @@ public class Pet extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
     private Set<Visit> visits = new HashSet<>();
 
+    @Builder
+    public Pet(String name, PetType petType, Owner owner, LocalDate birthDate) {
+        this.name = name;
+        this.petType = petType;
+        this.owner = owner;
+        this.birthDate = birthDate;
+    }
 }

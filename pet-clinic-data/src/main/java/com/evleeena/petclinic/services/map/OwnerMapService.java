@@ -16,10 +16,13 @@ import javax.annotation.Resource;
 @Profile({"default","map"})
 public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
 
-    @Resource
-    private PetTypeService petTypeService;
-    @Resource
-    private PetService petService;
+    private final PetTypeService petTypeService;
+    private final PetService petService;
+
+    public OwnerMapService(PetTypeService petTypeService, PetService petService) {
+        this.petTypeService = petTypeService;
+        this.petService = petService;
+    }
 
     @Override
     public Owner findByLastName(String lastName) {

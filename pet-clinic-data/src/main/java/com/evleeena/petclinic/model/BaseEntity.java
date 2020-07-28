@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class BaseEntity implements Serializable {
     @Id
